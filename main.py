@@ -14,14 +14,16 @@ app = Flask(__name__)
 class detector():
 
 	def __init__(self):
-		self.bucket_name = os.environ['MODEL_BUCKET']
-		self.model_filename = os.environ['MODEL_FILENAME']
+		# self.bucket_name = os.environ['MODEL_BUCKET']
+		# self.model_filename = os.environ['MODEL_FILENAME']
+		self.bucket_name = 'shoppingassitant-275209.appspot.com'
+		self.model_filename = 'saved_model.pb'
 		self.labels_path = 'mscoco_label_map.pbtxt'
 		self.model = None
 		self.category_map = None
 
 	def get_label_map(self):
-		with open(labels_path,"r") as labels:
+		with open(self.labels_path,"r") as labels:
 			lines = labels.readlines()
 			res = []
 			for l in lines:
@@ -80,18 +82,15 @@ class detector():
 
 @app.before_first_request
 def _load_model():
+	detector_obj.get_label_map()
 	client = storage.Client()
 	bucket = client.bucket(detector_obj.bucket_name)
 	blob = bucket.blob(detector_obj.model_filename)
-	print(dir(blob))
-	print(detector_obj.bucket_name)
-	print(detector_obj.model_filename)
-	detector_obj.get_label_map()
-	print(detector_obj.category_map)
-	blob.download_to_file('saved_model.pb')
-	print("Model Downloaded..!")
-	detector_obj.model = tf.saved_model.load(detector_obj.model_filename)
-	detector_obj.model = detector_obj.model.signatures['serving_default']
+	# blob.download_to_filename('models/saved_model.pb')
+	# print("Model Downloaded..!")
+	# detector_obj.model = tf.saved_model.load('models/saved_model.pb')
+	detector_obj.model = tf.keras.applications.MobileNet()
+	# detector_obj.model = detector_obj.model.signatures['serving_default']
 
 @app.errorhandler(500)
 def server_error(e):
