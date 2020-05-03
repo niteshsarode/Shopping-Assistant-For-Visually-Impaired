@@ -1,0 +1,18 @@
+runtime: python
+env: flex
+entrypoint: gunicorn -b :$PORT main:app
+
+runtime_config:
+  python_version: 3
+
+# manual_scaling:
+#   instances: 1
+
+# endpoints_api_service:
+#   name: shoppingassitant-275209.appspot.com
+#   config_id: 2020-05-02r3
+
+env_variables:
+    # The app will look for the model file at: gs://MODEL_BUCKET/MODEL_FILENAME
+    MODEL_BUCKET: shoppingassitant-275209.appspot.com
+    MODEL_FILENAME: saved_model.pb
