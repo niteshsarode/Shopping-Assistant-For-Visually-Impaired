@@ -12,7 +12,14 @@ runtime_config:
 #   name: shoppingassitant-275209.appspot.com
 #   config_id: 2020-05-02r3
 
+beta_settings:
+  cloud_sql_instances: shoppingassitant-275209:us-central1:cloud-sql-instance
+
 env_variables:
     # The app will look for the model file at: gs://MODEL_BUCKET/MODEL_FILENAME
+    CLOUD_SQL_CONNECTION_NAME: shoppingassitant-275209:us-central1:cloud-sql-instance
+    DB_USER: postgres
+    DB_PASS: postgres
+    DB_NAME: user_db
     MODEL_BUCKET: shoppingassitant-275209.appspot.com
     MODEL_FILENAME: saved_model.pb

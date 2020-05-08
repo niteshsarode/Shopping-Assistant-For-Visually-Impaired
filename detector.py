@@ -3,6 +3,8 @@ from PIL import ImageDraw
 from google.cloud import storage
 import numpy as np
 import tensorflow as tf
+import os.path
+from os import path
 
 class detector:
 
@@ -13,17 +15,17 @@ class detector:
 		self.model_filename = 'saved_model.pb'
 		self.labels_path = 'mscoco_label_map.pbtxt'
 		self.model = self.load_model()
-		self.category_map = get_label_map()
+		self.category_map = self.get_label_map()
 		
 	def load_model(self):
 		client = storage.Client()
 		bucket = client.bucket(self.bucket_name)
 		blob = bucket.blob(self.model_filename)
-		blob.download_to_filename('models/'+self.model_filename)
+		if not path.exists('models/'+self.model_filename):
+			blob.download_to_filename('models/'+self.model_filename)
 		print("Model Downloaded..!")
-		print(self.model_filename)
-		sess = tf.compat.v1.Session()
-		model = tf.saved_model.load(sess,None,'models/saved_model.pb')
+		# sess = tf.compat.v1.Session()
+		model = tf.keras.models.load_model('models/')
 		return model.signatures['serving_default']
 
 	def get_label_map(self):
@@ -78,7 +80,7 @@ class detector:
 		# result['original'] = encode_image(image.copy())
 
 		for cls, new_image in new_images.items():
-			category = self.category_map[cls]
+			category = self.category_map[str(cls)]
 			result[category] = 1
 			# result[category] = encode_image(new_image)
 
