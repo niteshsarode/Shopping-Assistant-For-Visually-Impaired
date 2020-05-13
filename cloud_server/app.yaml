@@ -6,11 +6,7 @@ runtime_config:
   python_version: 3
 
 # manual_scaling:
-#   instances: 1
-
-# endpoints_api_service:
-#   name: shoppingassitant-275209.appspot.com
-#   config_id: 2020-05-02r3
+#   instances: 5
 
 beta_settings:
   cloud_sql_instances: shoppingassitant-275209:us-central1:cloud-sql-instance

@@ -5,6 +5,8 @@ import numpy as np
 import tensorflow as tf
 import os.path
 from os import path
+import io
+from io import StringIO
 
 class detector:
 
@@ -21,11 +23,11 @@ class detector:
 		client = storage.Client()
 		bucket = client.bucket(self.bucket_name)
 		blob = bucket.blob(self.model_filename)
-		if not path.exists('models/'+self.model_filename):
-			blob.download_to_filename('models/'+self.model_filename)
+		if not path.exists(self.model_filename):
+			blob.download_to_filename(self.model_filename)
 		print("Model Downloaded..!")
 		# sess = tf.compat.v1.Session()
-		model = tf.keras.models.load_model('models/')
+		model = tf.keras.models.load_model('')
 		return model.signatures['serving_default']
 
 	def get_label_map(self):
@@ -63,8 +65,9 @@ class detector:
 		
 		return boxes, scores, classes, num_detections
 
-	def detect_objects(self, image_path):
-		image = Image.open(image_path).convert('RGB')
+	def detect_objects(self, image_bytes):
+
+		image = Image.open(io.BytesIO(image_bytes))
 		boxes, scores, classes, num_detections = self.detect(image)
 		image.thumbnail((480, 480), Image.ANTIALIAS)
 

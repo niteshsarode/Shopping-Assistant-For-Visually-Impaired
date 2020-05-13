@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "560268129482",
+    "firebase_url": "https://shoppingassitant-275209.firebaseio.com",
+    "project_id": "shoppingassitant-275209",
+    "storage_bucket": "shoppingassitant-275209.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560268129482:android:fb8afffd1e74ec46e7b033",
+        "android_client_info": {
+          "package_name": "com.example.main_note_taker_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560268129482-2a4gn3nep86qm5sc59fleklgc99ii7a7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.main_note_taker_app",
+            "certificate_hash": "12c1a0daf0f0659636cb5618ce3630c85ad8b17c"
+          }
+        },
+        {
+          "client_id": "560268129482-t6chn7rqesmlq8farde2eqf0tl695g9v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_403SxX_t3bvN0Idy5B3KF-P17zlLqrE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560268129482-t6chn7rqesmlq8farde2eqf0tl695g9v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
